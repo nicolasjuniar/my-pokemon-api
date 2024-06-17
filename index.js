@@ -11,31 +11,32 @@ app.use(
 )
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`API listening on port ${port}`)
 })
 
 // hardcode catch rate 50%
-app.get('/catchrate', (req, res) => {
+app.get('/catch-rate', (req, res) => {
   res.json({
     'catch_rate': 0.5
   })
 })
 
 // release pokemon using random number only 1-100, number higher than 100 have higher fail rate
-app.get('/release', (req, res) => {
+app.get('/release-pokemon', (req, res) => {
   var random_number = getRandomNumber(1, 100)
   res.json({
     'random_number': random_number,
-    'isPrime': isPrime(random_number)
+    'is_prime': isPrime(random_number)
   })
 })
 
 // rename pokemon
-app.get('/rename', (req, res) => {
+app.post('/rename-pokemon', (req, res) => {
   var name = req.body.name
   var rename_counter = req.body.counter + 1
   res.json({
-    'new_name': name + '-' + fibonacciIterative(rename_counter),
+    'new_name': name,
+    'additional_name': '-' + fibonacciIterative(rename_counter),
     'counter': rename_counter
   })
 })
